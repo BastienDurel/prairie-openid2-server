@@ -106,6 +106,8 @@ $core_config['mail']['from_name'] = 			"";
 $core_config['mail']['mailer'] = 			"smtp";
 $core_config['mail']['wordwrap'] = 			80;
 
+// SECURITY CONFIGURATION ---------------------------------------
+$core_config['security']['force_ssl'] = 1; // Set to 0 to don't force login form to SSL
 
 // END OF CONFIG FILE ----------------------------------------------------
 
