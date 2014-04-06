@@ -352,4 +352,11 @@ function formatIdentityName($id) {
 	return $id;
 }
 
+function is_ssl() {
+  if (strncmp($_SERVER['SCRIPT_URI'], 'https://', 8) == 0 ||
+      (array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] == 'on'))
+    return true;
+  return false;
+}
+
 ?>
