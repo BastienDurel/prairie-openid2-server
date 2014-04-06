@@ -67,7 +67,7 @@ else {
 			
 			$thumbnail_width = array(60, 100, 200);
 			$destination = $core_config['file']['dir'] . "avatars/" . $_SESSION['user_id'] . "/";
-	
+
 			if (!is_dir($destination)) {
 				$oldumask = umask(0);
 				if(!mkdir ($destination, 0770, 1)) {
@@ -158,6 +158,8 @@ if (!empty($GLOBALS['script_error_log'])) {
 
 	define("SCRIPT_THEME_PATH", "theme/silver/");
 	
+	include_once(SCRIPT_THEME_PATH . 'theme_functions.php');
+
 	define ('STND_LOCALE', $core_config['script']['server_locale']);
 
 	$tpl->set('content', '');
