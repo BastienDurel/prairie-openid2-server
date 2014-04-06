@@ -153,8 +153,13 @@
 	</div>
 	</form>
 
+<?php
+$url='';
+if (!is_ssl()) $url = 'action="https://' . $_SERVER['HTTP_HOST'] . 
+		 $_SERVER['SCRIPT_URL'] . '?' . $_SERVER['QUERY_STRING'] . '&return_to_http=1';
+?>
 
-	<form method="post">
+	<form method="post" <?php echo $url ?>>
 	<div class="box" id="box_login">
 		<div class="box_header">
 			<h1><?php echo _("Login");?></h1>

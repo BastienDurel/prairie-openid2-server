@@ -29,7 +29,6 @@ if (isset($_POST['login_admin'])) {
 	if (empty($login_password)) {
 		$GLOBALS['script_error_log'][] = _("Please fill in your password.");;
 	}
-
 	if (!empty($core_config['security']['login_with_email'])) {
 		$login_email = trim($_POST['login_email']);
 	
@@ -69,16 +68,21 @@ if (isset($_POST['login_admin'])) {
 			$_SESSION['user_timezone'] = $result[0]['user_timezone'];
 			$_SESSION['user_birthdate'] = $result[0]['user_birthdate'];
 			$openIDMode = GetFromURL("openid_mode"); 
-			
+
+			if (is_ssl() && array_key_exists('return_to_http', $_REQUEST)) {
+			  $__location = 'location: http://' . $_SERVER['HTTP_HOST'] . '/trust?';
+			}
+			else
+			  $__location = 'location: /trust?';
 			if ($openIDMode) {
-				if ($_SERVER["REQUEST_METHOD"]=="GET") {
-					header('location: /trust?' . http_build_query($_GET));
-				} else {
-					unset ($_POST["login_email"]); 
-					unset ($_POST["login_password"]); 
-					header('location: /trust?' . http_build_query($_POST));
-				}
-				exit;
+			  if ($_SERVER["REQUEST_METHOD"]=="GET") {
+			    header($__location . http_build_query($_GET));
+			  } else {
+			    unset ($_POST["login_email"]); 
+			    unset ($_POST["login_password"]); 
+			    header($__location . http_build_query($_POST));
+			  }
+			  exit;
 			}
 			else {
 				header('location: /profile');
