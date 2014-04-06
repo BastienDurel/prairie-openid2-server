@@ -155,8 +155,9 @@
 
 <?php
 $url='';
-if (!is_ssl()) $url = 'action="https://' . $_SERVER['HTTP_HOST'] . 
-		 $_SERVER['SCRIPT_URL'] . '?' . $_SERVER['QUERY_STRING'] . '&return_to_http=1';
+if (!is_ssl() && $core_config['security']['force_ssl'])
+  $url = 'action="https://' . $_SERVER['HTTP_HOST'] . 
+    $_SERVER['SCRIPT_URL'] . '?' . $_SERVER['QUERY_STRING'] . '&return_to_http=1';
 ?>
 
 	<form method="post" <?php echo $url ?>>
