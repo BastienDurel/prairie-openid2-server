@@ -24,7 +24,7 @@
 
 
 include_once ("config/core.config.php");
-
+include_once ("inc/functions.inc.php");
 
 // SESSION HANDLER --------------------------------------------------
 session_name($core_config['php']['session_name']);
@@ -89,7 +89,7 @@ else {
 			else {
 				$mime_type = $_FILES['frm_file']['type'];
 			}
-	
+
 			// We use this to map IE-mimetype to standard mimetype
 			$mime_map = array(array("from" => "image/pjpeg", "to" => "image/jpeg"));
 	
@@ -98,6 +98,10 @@ else {
 					$mime_type = $i['to'];
 				}
 			endforeach;
+
+			if (($pos = strpos($mime_type, '; charset=')) !== FALSE) {
+			  $mime_type = substr($mime_type, 0, $pos);
+			}
 	
 			// Is the mime-type allowed?
 			if (!validateMimeType($allowable_mime_types, $mime_type)) {
